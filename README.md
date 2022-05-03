@@ -1,5 +1,5 @@
 # web
-
+Node v14.19.1
 ## Project setup
 ```
 npm install
