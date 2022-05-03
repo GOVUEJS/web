@@ -41,14 +41,17 @@
       </v-col>
     </v-row>
   </v-container>
+
 </template>
+
 <script>
+
 export default {
-  name: 'AppContents',
+  name: 'HomeView',
   data() {
     return {
       cards: ['Today', 'Yesterday'],
-    }
+    };
   },
-}
+};
 </script>
