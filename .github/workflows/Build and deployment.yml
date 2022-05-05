@@ -60,8 +60,8 @@ jobs:
         port: ${{ secrets.PORT }}
         script_stop: true
         script: |
-          rm -rf ${{ secrets.NGINX_PATH }}/html/*
-          cp -r -f ~/web/dist/* ${{ secrets.NGINX_PATH }}/html/
+          sudo rm -rf ${{ secrets.NGINX_PATH }}/html/*
+          sudo cp -r -f ~/web/dist/* ${{ secrets.NGINX_PATH }}/html/
     
     
     - name: run with ssh
