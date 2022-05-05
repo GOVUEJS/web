@@ -1,0 +1,56 @@
+<template>
+  <v-navigation-drawer
+      v-model="drawer"
+      app
+  >
+    <v-sheet
+        color="grey lighten-4"
+        class="pa-4"
+    >
+      <v-avatar
+          class="mb-4"
+          color="grey darken-1"
+          size="64"
+      ></v-avatar>
+
+      <div>hwisaek@github.com</div>
+    </v-sheet>
+
+    <v-divider></v-divider>
+
+    <v-list>
+      <v-list-item
+          v-for="[icon, text, link] in links"
+          :to="link"
+          :key="icon"
+          link
+      >
+        <v-list-item-icon>
+          <v-icon>{{ icon }}</v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+          <v-list-item-title>
+            {{ text }}
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
+  </v-navigation-drawer>
+</template>
+<script>
+export default {
+  name: 'NavigationDrawer',
+  data() {
+    return {
+      drawer: null,
+      links: [
+        ['mdi-inbox-arrow-down', 'Home', '/home'],
+        ['mdi-send', 'About', '/about'],
+        ['mdi-delete', 'Trash', '/trash'],
+        ['mdi-alert-octagon', 'Spam', '/spam'],
+      ],
+    };
+  },
+};
+</script>
