@@ -1,0 +1,76 @@
+name: Build and deployment
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+
+  build:
+    name: Build and deployment
+    runs-on: ubuntu-latest
+    steps:
+    - name: git pull with ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.ROOT_USERNAME }}
+        password: ${{ secrets.ROOT_PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script_stop: true
+        script: |
+          cd ~/web
+          git pull
+          
+          
+    - name: npm install with ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.ROOT_USERNAME }}
+        password: ${{ secrets.ROOT_PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script_stop: true
+        script: |
+          cd ~/web
+          npm install
+          
+          
+    - name: build with ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.ROOT_USERNAME }}
+        password: ${{ secrets.ROOT_PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script_stop: true
+        script: |
+          cd ~/web
+          npm run build
+    
+    
+    - name: copy with ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.ROOT_USERNAME }}
+        password: ${{ secrets.ROOT_PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script_stop: true
+        script: |
+          rm -rf ${{ secrets.NGINX_PATH }}/html/*
+          cp -r -f ~/web/dist/* ${{ secrets.NGINX_PATH }}/html/
+    
+    
+    - name: run with ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.ROOT_USERNAME }}
+        password: ${{ secrets.ROOT_PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script_stop: true
+        script: |
+          systemctl restart nginx
