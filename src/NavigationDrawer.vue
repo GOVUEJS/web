@@ -47,7 +47,7 @@ export default {
       links: [
         ['mdi-inbox-arrow-down', 'Home', '/home'],
         ['mdi-send', 'About', '/about'],
-        ['mdi-delete', 'Trash', '/trash'],
+        ['mdi-delete', 'Articles', '/articles'],
         ['mdi-alert-octagon', 'Spam', '/spam'],
       ],
     };

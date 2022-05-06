@@ -8,6 +8,7 @@ const router = new VueRouter({
     routes: [
         {path: '/home', component: () => import('@/views/HomeView')},
         {path: '/about', component: () => import('@/views/AboutView')},
+        {path: '/articles', component: () => import('@/views/ArticleView')},
     ],
 });
 
