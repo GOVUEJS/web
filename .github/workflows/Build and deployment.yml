@@ -48,7 +48,7 @@ jobs:
         script_stop: true
         script: |
           cd ~/web
-          npm run build
+          npm run build:development
     
     
     - name: copy with ssh
