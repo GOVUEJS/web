@@ -38,12 +38,12 @@
     </v-list>
   </v-navigation-drawer>
 </template>
+
 <script>
 export default {
   name: 'NavigationDrawer',
   data() {
     return {
-      drawer: null,
       links: [
         ['mdi-inbox-arrow-down', 'Home', '/home'],
         ['mdi-send', 'About', '/about'],
@@ -51,6 +51,11 @@ export default {
         ['mdi-alert-octagon', 'Spam', '/spam'],
       ],
     };
+  },
+  computed: {
+    drawer() {
+      return this.$store.state.drawer;
+    },
   },
 };
 </script>

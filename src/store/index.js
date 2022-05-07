@@ -1,15 +1,15 @@
-import { defineStore } from 'pinia';
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-export const useCounterStore = defineStore('counter', {
-    state: () => ({
-        count: 0,
-    }),
-    getters: {
-        double: state => state.count * 2,
+Vue.use(Vuex);
+
+export const store = new Vuex.Store({
+    state: {
+        drawer: true,
     },
-    actions: {
-        increment() {
-            this.count++;
+    mutations: {
+        toggleDrawer(state) {
+            state.drawer = !state.drawer;
         },
     },
 });
