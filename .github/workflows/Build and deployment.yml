@@ -22,7 +22,7 @@ jobs:
         script_stop: true
         script: |
           cd ~/web
-          git reset -hard
+          git reset --hard
           git pull
           
           
