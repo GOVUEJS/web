@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 
-function setInterceptor(instance) {
+function setInterceptor(instance: AxiosInstance) {
     // 요청 인터셉터 추가하기
     axios.interceptors.request.use(function (config) {
         // 요청이 전달되기 전에 작업 수행
