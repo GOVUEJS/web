@@ -4,54 +4,52 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "serve:development": "vue-cli-service serve --mode development",
-    "serve:production": "vue-cli-service serve --mode production",
     "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e",
+    "lint": "vue-cli-service lint",
     "build:development": "vue-cli-service build --mode development",
-    "lint": "vue-cli-service lint"
+    "serve:development": "vue-cli-service serve --mode development",
+    "serve:local": "vue-cli-service serve --mode local",
+    "serve:production": "vue-cli-service serve --mode production"
   },
   "dependencies": {
-    "@vue/composition-api": "^1.6.0",
-    "axios": "^0.27.2",
+    "@mdi/font": "5.9.55",
     "core-js": "^3.8.3",
-    "pinia": "^2.0.13",
-    "vue": "^2.6.14",
-    "vue-router": "^3.5.3",
-    "vuetify": "^2.6.0",
-    "vuex": "^3.6.2"
+    "pinia": "^2.0.14",
+    "roboto-fontface": "*",
+    "vue": "^3.2.13",
+    "vue-router": "^4.0.3",
+    "vuetify": "^3.0.0-beta.0",
+    "vuex": "^4.0.0",
+    "webfontloader": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
+    "@types/jest": "^27.0.1",
+    "@types/webfontloader": "^1.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-e2e-cypress": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-plugin-typescript": "~5.0.0",
+    "@vue/cli-plugin-unit-jest": "~5.0.0",
+    "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "@vue/eslint-config-typescript": "^9.1.0",
+    "@vue/test-utils": "^2.0.0-0",
+    "@vue/vue3-jest": "^27.0.0-alpha.1",
+    "babel-jest": "^27.0.6",
+    "cypress": "^8.3.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
-    "sass": "~1.32.0",
-    "sass-loader": "^10.0.0",
-    "vue-cli-plugin-pinia": "~0.1.2",
+    "jest": "^27.0.5",
+    "sass": "^1.38.0",
+    "sass-loader": "^12.0.0",
+    "ts-jest": "^27.0.4",
+    "typescript": "~4.5.5",
     "vue-cli-plugin-vuetify": "~2.4.8",
-    "vue-template-compiler": "^2.6.14",
-    "vuetify-loader": "^1.7.0"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "vuetify-loader": "^2.0.0-alpha.0"
+  }
 }
