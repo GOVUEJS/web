@@ -19,15 +19,14 @@
   </v-app>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+import SystemBar from '@/layouts/SystemBar.vue';
+import NavigationDrawer from '@/layouts/NavigationDrawer.vue';
+import AppBar from '@/layouts/AppBar.vue';
+import SystemFooter from '@/layouts/SystemFooter.vue';
 
-import SystemBar from '@/SystemBar';
-import NavigationDrawer from '@/NavigationDrawer';
-import AppBar from '@/AppBar';
-import SystemFooter from '@/SystemFooter';
-
-export default {
-  name: 'App',
+export default defineComponent({
   components: {SystemFooter, AppBar, NavigationDrawer, SystemBar},
-};
+});
 </script>

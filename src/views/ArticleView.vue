@@ -167,7 +167,7 @@ export default {
   methods: {
     async getData() {
       const res = await articles.a001();
-      this.desserts = res.data;
+      this.desserts = res.data.articleList;
     },
 
     async clickEdit(item) {
