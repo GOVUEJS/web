@@ -1,6 +1,7 @@
 <template>
-  <v-app-bar app>
-    <h1>{{ store.pageTitle }}</h1>
+  <v-app-bar
+      :title="store.pageTitle"
+      app>
   </v-app-bar>
 </template>
 
