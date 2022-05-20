@@ -1,123 +1,23 @@
 <template>
-  <v-data-table
-      :headers="headers"
-      :items="desserts"
-      sort-by="id"
-      :sort-desc="true"
-  >
-    <template v-slot:top>
-      <v-toolbar
-          flat
-      >
-        <v-toolbar-title>My CRUD</v-toolbar-title>
-        <v-divider
-            inset
-            vertical
-        ></v-divider>
-        <v-spacer></v-spacer>
-        <v-dialog
-            v-model="dialogVisible"
-            max-width="500px"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-                color="primary"
-                dark
-                v-bind="attrs"
-                v-on="on"
-            >
-              New Item
-            </v-btn>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="text-h5">{{ formTitle }}</span>
-            </v-card-title>
-
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                  >
-                    <v-text-field
-                        v-model="editedItem.title"
-                        label="Title"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                  >
-                    <v-text-field
-                        v-model="editedItem.content"
-                        label="Content"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                  color="blue darken-1"
-                  text
-                  @click="close"
-              >
-                Cancel
-              </v-btn>
-              <v-btn
-                  color="blue darken-1"
-                  text
-                  @click="save"
-              >
-                Save
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-<!--        <v-dialog v-model="dialogDelete" max-width="500px">-->
-<!--          <v-card>-->
-<!--            <v-card-title>Are you sure you want to delete this item?</v-card-title>-->
-<!--            <v-card-actions>-->
-<!--              <v-spacer></v-spacer>-->
-<!--              <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>-->
-<!--              <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>-->
-<!--              <v-spacer></v-spacer>-->
-<!--            </v-card-actions>-->
-<!--          </v-card>-->
-<!--        </v-dialog>-->
-      </v-toolbar>
-    </template>
-    <template v-slot:[`item.actions`]="{ item }">
-      <v-icon
-          small
-          @click="clickEdit(item)"
-      >
-        mdi-pencil
-      </v-icon>
-<!--      <v-icon-->
-<!--          small-->
-<!--          @click="deleteItem(item)"-->
-<!--      >-->
-<!--        mdi-delete-->
-<!--      </v-icon>-->
-    </template>
-    <template v-slot:no-data>
-      <v-btn
-          color="primary"
-          @click="getData"
-      >
-        Reset
-      </v-btn>
-    </template>
-  </v-data-table>
+  <v-table>
+    <thead>
+    <tr>
+      <th v-for="header in headers" :key="header.value" class="text-left">
+        {{ header.text }}
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr
+        v-for="item in desserts"
+        :key="item.id"
+    >
+      <td>{{ item.id }}</td>
+      <td>{{ item.title }}</td>
+      <td>{{ item.date }}</td>
+    </tr>
+    </tbody>
+  </v-table>
 </template>
 
 <script>
@@ -128,10 +28,9 @@ export default {
     dialogVisible: false,
     dialogDelete: false,
     headers: [
-      {text: 'id', value: 'id'},
-      {text: 'title', value: 'title'},
-      {text: 'date', value: 'date'},
-      {text: 'Actions', value: 'actions', sortable: false},
+      {text: 'ID', value: 'id'},
+      {text: 'Title', value: 'title'},
+      {text: 'Date', value: 'date'},
     ],
     desserts: [],
     editedIndex: -1,
