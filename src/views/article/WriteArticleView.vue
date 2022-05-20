@@ -8,6 +8,7 @@
         label="제목"
         :rules="titleRules"
         required
+        counter
     ></v-text-field>
 
     <v-textarea
@@ -15,6 +16,7 @@
         label="내용"
         :rules="contentRules"
         required
+        counter
     ></v-textarea>
 
     <v-btn
