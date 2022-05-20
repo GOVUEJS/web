@@ -4,28 +4,33 @@ import { useStore } from '@/store';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'home',
+    name: 'Main',
     component: () => import('@/views/HomeView.vue')
   },
   {
     path: '/home',
-    name: 'home',
+    name: 'Home',
     component: () => import('@/views/HomeView.vue')
   },
   {
     path: '/about',
-    name: 'about',
+    name: 'About',
     component: () => import('@/views/AboutView.vue')
   },
   {
     path: '/articles',
-    name: 'articles',
-    component: () => import('@/views/ArticleView.vue')
+    name: 'Articles',
+    component: () => import('@/views/article/ArticleView.vue'),
+  },
+  {
+    path: '/articles/write',
+    name: 'WriteArticle',
+    component: () => import('@/views/article/WriteArticleView.vue')
   },
   {
     path: '/spam',
-    name: 'spam',
-    component: () => import('@/views/ArticleView.vue')
+    name: 'Spam',
+    component: () => import('@/views/article/ArticleView.vue')
   },
 
   {
@@ -41,6 +46,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to) => {
+  useStore().changePageTitle(String(to.name));
   if (to.path === '/') {
     useStore().changePageTitle('Articles');
     return {name: 'articles'};

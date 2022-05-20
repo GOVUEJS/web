@@ -1,4 +1,6 @@
 <template>
+  <v-btn color="primary" @click="$router.push({name:'WriteArticle'})">글 쓰기</v-btn>
+
   <v-table>
     <thead>
     <tr>
