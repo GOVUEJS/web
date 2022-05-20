@@ -1,8 +1,8 @@
 <template>
   <!-- App.vue -->
 
-  <v-app :theme="theme">
-    <SystemBar @toggleTheme="toggleTheme"/>
+  <v-app :theme="systemStore.theme">
+    <SystemBar/>
 
     <NavigationDrawer/>
 
@@ -25,18 +25,15 @@ import SystemBar from '@/layouts/SystemBar.vue';
 import NavigationDrawer from '@/layouts/NavigationDrawer.vue';
 import AppBar from '@/layouts/AppBar.vue';
 import SystemFooter from '@/layouts/SystemFooter.vue';
+import { useSystemStore } from '@/store';
 
 export default defineComponent({
   components: {SystemFooter, AppBar, NavigationDrawer, SystemBar},
-  data() {
+  setup() {
+    const systemStore = useSystemStore();
     return {
-      theme: 'light'
+      systemStore,
     };
-  },
-  methods: {
-    toggleTheme() {
-      this.theme = this.theme === 'light' ? 'dark' : 'light';
-    }
   },
 });
 </script>

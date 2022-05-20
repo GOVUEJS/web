@@ -10,12 +10,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useSystemStore } from '@/store';
 
 export default defineComponent({
-  methods: {
-    toggleTheme() {
-      this.$emit('toggleTheme');
-    }
-  },
+  setup() {
+    const system = useSystemStore();
+    return {
+      toggleTheme: system.toggleTheme
+    };
+  }
 });
 </script>
