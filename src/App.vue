@@ -1,8 +1,8 @@
 <template>
   <!-- App.vue -->
 
-  <v-app>
-    <SystemBar/>
+  <v-app :theme="theme">
+    <SystemBar @toggleTheme="toggleTheme"/>
 
     <NavigationDrawer/>
 
@@ -28,5 +28,15 @@ import SystemFooter from '@/layouts/SystemFooter.vue';
 
 export default defineComponent({
   components: {SystemFooter, AppBar, NavigationDrawer, SystemBar},
+  data() {
+    return {
+      theme: 'light'
+    };
+  },
+  methods: {
+    toggleTheme() {
+      this.theme = this.theme === 'light' ? 'dark' : 'light';
+    }
+  },
 });
 </script>
