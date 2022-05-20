@@ -1,10 +1,15 @@
 <template>
   <v-system-bar app>
+    <span>Hwisaek's web</span>
     <v-spacer></v-spacer>
-    <v-btn @click="toggleTheme">toggle theme</v-btn>
-    <v-icon>mdi-square</v-icon>
-    <v-icon>mdi-circle</v-icon>
-    <v-icon>mdi-triangle</v-icon>
+    <v-icon @click="toggleTheme">
+      <template v-if="system.theme==='light'">
+        mdi-brightness-5
+      </template>
+      <template v-else>
+        mdi-brightness-2
+      </template>
+    </v-icon>
   </v-system-bar>
 </template>
 
@@ -16,6 +21,7 @@ export default defineComponent({
   setup() {
     const system = useStore();
     return {
+      system,
       toggleTheme: system.toggleTheme
     };
   }
