@@ -42,10 +42,10 @@ export default defineComponent({
   data() {
     return {
       links: [
-        ['mdi-inbox-arrow-down', 'Home', '/home'],
-        ['mdi-send', 'About', '/about'],
-        ['mdi-delete', 'Articles', '/articles'],
-        ['mdi-alert-octagon', 'Spam', '/spam'],
+        ['mdi-home', 'Home', '/home'],
+        ['mdi-card-text', 'Articles', '/articles'],
+        ['mdi-information', 'About', '/about'],
+        ['mdi-delete', 'Spam', '/spam'],
       ],
     };
   },
