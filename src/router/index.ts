@@ -28,6 +28,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/article/WriteArticleView.vue')
   },
   {
+    path: '/articles/:id',
+    name: 'ReadArticle',
+    component: () => import('@/views/article/ReadArticleView.vue'),
+    props: true
+  },
+  {
     path: '/spam',
     name: 'Spam',
     component: () => import('@/views/article/ArticleView.vue')

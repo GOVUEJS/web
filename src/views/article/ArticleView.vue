@@ -10,7 +10,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr v-for="item in articleList" :key="item.id">
+    <tr v-for="item in articleList" :key="item.id" @click.prevent="clickArticle(item)" style="cursor: pointer">
       <td>{{ item.id }}</td>
       <td>{{ item.title }}</td>
       <td>{{ item.date }}</td>
@@ -22,6 +22,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import articles from '@/api/articles';
+import { ArticleItem } from '@/model/model';
 
 export default defineComponent({
   data: () => ({
@@ -40,6 +41,9 @@ export default defineComponent({
       const res = await articles.a001();
       this.articleList = res.data.articleList;
     },
+    clickArticle(item: ArticleItem) {
+      this.$router.push({name: 'ReadArticle', params: {id: item.id}});
+    }
   },
 });
 </script>

@@ -2,17 +2,18 @@
   <v-form
       ref="form"
       v-model="valid"
-      lazy-validation
   >
     <v-text-field
         v-model="articleItem.title"
         label="제목"
+        :rules="titleRules"
         required
     ></v-text-field>
 
     <v-textarea
         v-model="articleItem.content"
         label="내용"
+        :rules="contentRules"
         required
     ></v-textarea>
 
@@ -27,7 +28,7 @@
     <v-btn
         color="error"
         variant="outlined"
-        @click="clickCancle"
+        @click="clickBack"
     >
       뒤로가기
     </v-btn>
@@ -41,15 +42,23 @@ import articles from '@/api/articles';
 
 export default defineComponent({
   data: () => ({
+    valid: false,
     articleItem: new ArticleItem(),
-    valid: true,
-    name: '',
-    email: '',
-    select: null,
-    checkbox: false,
+    titleRules: [
+      (v: string) => !!v || '제목을 입력해주세요',
+    ],
+    contentRules: [
+      (v: string) => !!v || '내용을 입력해주세요',
+    ],
   }),
   methods: {
     async clickWrite() {
+      // eslint-disable-next-line
+      (this.$refs['form'] as any).validate();
+      if (!this.valid) {
+        return;
+      }
+
       const data = {
         title: this.articleItem.title,
         content: this.articleItem.content
@@ -59,7 +68,7 @@ export default defineComponent({
         this.$router.push({name: 'Articles'});
       }
     },
-    clickCancle() {
+    clickBack() {
       this.$router.back();
     }
   },
