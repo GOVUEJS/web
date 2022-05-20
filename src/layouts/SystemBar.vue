@@ -1,6 +1,6 @@
 <template>
   <v-system-bar app>
-    <span>Hwisaek's web</span>
+    <v-btn variant="plain" @click="clickMain">Hwisaek's web</v-btn>
     <v-spacer></v-spacer>
     <v-icon @click="toggleTheme">
       <template v-if="system.theme==='light'">
@@ -24,6 +24,11 @@ export default defineComponent({
       system,
       toggleTheme: system.toggleTheme
     };
-  }
+  },
+  methods: {
+    clickMain() {
+      this.$router.push({path: '/'});
+    }
+  },
 });
 </script>
