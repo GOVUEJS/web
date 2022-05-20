@@ -55,7 +55,7 @@ router.beforeEach((to) => {
   useStore().changePageTitle(String(to.name));
   if (to.path === '/') {
     useStore().changePageTitle('Articles');
-    return {name: 'articles'};
+    return {name: 'Articles'};
   }
 });
 
