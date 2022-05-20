@@ -25,12 +25,12 @@ import SystemBar from '@/layouts/SystemBar.vue';
 import NavigationDrawer from '@/layouts/NavigationDrawer.vue';
 import AppBar from '@/layouts/AppBar.vue';
 import SystemFooter from '@/layouts/SystemFooter.vue';
-import { useSystemStore } from '@/store';
+import { useStore } from '@/store';
 
 export default defineComponent({
   components: {SystemFooter, AppBar, NavigationDrawer, SystemBar},
   setup() {
-    const systemStore = useSystemStore();
+    const systemStore = useStore();
     return {
       systemStore,
     };

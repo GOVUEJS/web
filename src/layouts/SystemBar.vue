@@ -10,11 +10,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { useSystemStore } from '@/store';
+import { useStore } from '@/store';
 
 export default defineComponent({
   setup() {
-    const system = useSystemStore();
+    const system = useStore();
     return {
       toggleTheme: system.toggleTheme
     };

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { useStore } from '@/store';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -41,6 +42,7 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   if (to.path === '/') {
+    useStore().changePageTitle('Articles');
     return {name: 'articles'};
   }
 });

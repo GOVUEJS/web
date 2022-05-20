@@ -21,6 +21,7 @@
           :prepend-icon="icon"
           :title="title"
           :to="link"
+          @click="store.changePageTitle(title)"
       >
       </v-list-item>
     </v-list>
@@ -29,8 +30,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useStore } from '@/store';
 
 export default defineComponent({
+  setup() {
+    const store = useStore();
+    return {
+      store
+    };
+  },
   data() {
     return {
       links: [
