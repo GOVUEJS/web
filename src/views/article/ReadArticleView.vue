@@ -10,7 +10,9 @@
 
     <v-divider></v-divider>
 
-    <v-card-text>{{ articleItem.content }}</v-card-text>
+    <v-card-text>
+      <pre>{{ articleItem.content }}</pre>
+    </v-card-text>
 
     <v-divider></v-divider>
 
