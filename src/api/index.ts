@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { useCookies } from 'vue3-cookies';
 
 function setInterceptor(instance: AxiosInstance) {
   // 요청 인터셉터 추가하기
@@ -30,6 +31,10 @@ export const echo_api = function () {
     baseURL: `${process.env.VUE_APP_API_SERVER}/api/v1`,
     withCredentials: true
   });
-
+  const {cookies} = useCookies();
+  const accessToken = cookies.get('accessToken');
+  if (accessToken !== null) {
+    instance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+  }
   return setInterceptor(instance);
 }();
