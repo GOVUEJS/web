@@ -5,8 +5,7 @@ export const useStore = defineStore('store', {
     theme: 'light',
     pageTitle: 'Articles',
     drawer: true,
-    accessToken: '',
-    refreshToken: '',
+
   }),
   getters: {},
   actions: {
@@ -23,11 +22,5 @@ export const useStore = defineStore('store', {
     toggleDrawer() {
       this.drawer = !this.drawer;
     },
-    setAccessToken(token: string) {
-      this.accessToken = token;
-    },
-    setRefreshToken(token: string) {
-      this.refreshToken = token;
-    }
   },
 });
