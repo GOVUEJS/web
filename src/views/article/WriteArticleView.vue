@@ -66,7 +66,7 @@ export default defineComponent({
         content: this.articleItem.content
       };
       const res = await articles.a002(data);
-      if (res.status === 200) {
+      if (res.status === 201) {
         this.$router.push({name: 'Articles'});
       }
     },
