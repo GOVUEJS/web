@@ -16,6 +16,7 @@
 </template>
 
 <script lang="ts">
+import systemAPI from '@/api/system';
 import { defineComponent } from 'vue';
 import { useStore } from '@/store';
 
@@ -34,7 +35,11 @@ export default defineComponent({
     clickLogin() {
       this.$router.push({name: 'Login'});
     },
-    clickLogout() {
+    async clickLogout() {
+      const res = await systemAPI.logout();
+      if (res.status !== 200) {
+        return;
+      }
       this.$router.push({path: '/'});
     },
   },

@@ -28,6 +28,7 @@ function setInterceptor(instance: AxiosInstance) {
 export const echo_api = function () {
   const instance = axios.create({
     baseURL: `${process.env.VUE_APP_API_SERVER}/api/v1`,
+    withCredentials: true
   });
 
   return setInterceptor(instance);

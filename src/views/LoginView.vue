@@ -77,9 +77,18 @@ export default defineComponent({
         pw: this.password.value
       };
       const res = await system.login(data);
-      if (res.status === 200) {
-        document.cookie = `accessToken=${res.data.accessToken}`;
+      if (res.status !== 200) {
+        return;
       }
+
+      const accessTokenExpires = new Date();
+      accessTokenExpires.setTime(accessTokenExpires.getTime() + 1 * 60 * 60 * 1000);
+      document.cookie = `accessToken=${res.data.accessToken}; path=/; expires=${accessTokenExpires.toString()}`;
+
+      const refreshTokenExpires = new Date();
+      refreshTokenExpires.setTime(refreshTokenExpires.getTime() + 24 * 60 * 60 * 1000);
+      document.cookie = `refreshToken=${res.data.refresh}; path=/; expires=${refreshTokenExpires.toString()}`;
+
 
       this.$router.push({path: document.referrer});
     },
