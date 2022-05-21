@@ -10,6 +10,8 @@
         mdi-brightness-2
       </template>
     </v-icon>
+    <v-icon @click="clickLogin">mdi-login</v-icon>
+    <v-icon @click="clickLogout">mdi-logout</v-icon>
   </v-system-bar>
 </template>
 
@@ -28,7 +30,13 @@ export default defineComponent({
   methods: {
     clickMain() {
       this.$router.push({path: '/'});
-    }
+    },
+    clickLogin() {
+      this.$router.push({name: 'Login'});
+    },
+    clickLogout() {
+      this.$router.push({path: '/'});
+    },
   },
 });
 </script>
