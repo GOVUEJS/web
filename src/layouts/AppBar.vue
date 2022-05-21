@@ -16,5 +16,16 @@ export default defineComponent({
       store
     };
   },
+  created() {
+    this.loadTheme();
+  },
+  methods: {
+    loadTheme() {
+      if (localStorage.getItem('theme') === null) {
+        localStorage.theme = 'light';
+      }
+      this.store.setTheme(localStorage.theme);
+    }
+  },
 });
 </script>

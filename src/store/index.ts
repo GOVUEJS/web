@@ -14,6 +14,10 @@ export const useStore = defineStore('store', {
     },
     toggleTheme() {
       this.theme = this.theme === 'light' ? 'dark' : 'light';
+      localStorage.theme = this.theme;
+    },
+    setTheme(theme: string) {
+      this.theme = theme === 'light' ? 'light' : 'dark';
     },
     toggleDrawer() {
       this.drawer = !this.drawer;
