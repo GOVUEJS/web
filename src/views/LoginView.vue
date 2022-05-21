@@ -5,19 +5,23 @@
       lazy-validation
   >
     <v-text-field
-        v-model="email"
-        :rules="emailRules"
         label="E-mail"
+        v-model="email.value"
+        :rules="email.rules"
+        @keyup.enter="clickLogin"
+        counter
         required
+
     ></v-text-field>
 
     <v-text-field
-        v-model="password.value"
-        :rules="[password.rules.required, password.rules.min]"
-        :type="password.show ? 'text' : 'password'"
         label="Password"
-        hint="At least 8 characters"
+        v-model="password.value"
+        :rules="password.rules"
+        :type="password.show ? 'text' : 'password'"
+        @keyup.enter="clickLogin"
         counter
+        required
     >
       <template v-slot:append>
         <v-icon @click="password.show = !password.show">
@@ -39,34 +43,45 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import system from '@/api/system';
 
 export default defineComponent({
   data: () => ({
     formValid: true,
-    email: '',
-    emailRules: [
-      (v: string) => !!v || 'E-mail is required',
-      (v: string) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-    ],
+    email: {
+      value: '',
+      rules: [
+        (v: string) => !!v || '이메일을 입력해주세요.',
+        (v: string) => /.+@.+\..+/.test(v) || '이메일이 유효하지 않습니다.',
+      ]
+    },
     password: {
       value: '',
       show: false,
-      rules: {
-        required: (value: string) => !!value || 'Required.',
-        min: (v: string) => v.length >= 8 || 'Min 8 characters',
-      }
+      rules: [
+        (v: string) => !!v || '패스워드를 입력해주세요.',
+      ]
     },
   }),
 
   methods: {
-    clickLogin() {
+    async clickLogin() {
       this.validate();
 
       if (!this.formValid) {
         return;
       }
 
-      this.$router.push({name: 'Articles'});
+      const data = {
+        email: this.email.value,
+        pw: this.password.value
+      };
+      const res = await system.login(data);
+      if (res.status === 200) {
+        document.cookie = `accessToken=${res.data.accessToken}`;
+      }
+
+      this.$router.push({path: document.referrer});
     },
     validate() {
       // eslint-disable-next-line
