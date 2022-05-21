@@ -44,8 +44,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import system from '@/api/system';
+import { useStore } from '@/store';
 
 export default defineComponent({
+  setup() {
+    const store = useStore();
+    return {store};
+  },
   data: () => ({
     formValid: true,
     email: {
@@ -80,6 +85,10 @@ export default defineComponent({
       if (res.status !== 200) {
         return;
       }
+      const accessToken = res.data.accessToken;
+      const refreshToken = res.data.refreshToken;
+      this.store.setAccessToken(accessToken);
+      this.store.setRefreshToken(refreshToken);
 
       this.$router.push({path: document.referrer});
     },
