@@ -8,6 +8,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/HomeView.vue')
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/LoginView.vue')
+  },
+  {
     path: '/home',
     name: 'Home',
     component: () => import('@/views/HomeView.vue')
@@ -42,7 +47,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    component: () => import('@/views/NotFound.vue')
+    component: () => import('@/views/NotFoundView.vue')
   },
 ];
 
