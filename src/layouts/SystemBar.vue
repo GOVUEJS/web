@@ -22,10 +22,10 @@ import { useStore } from '@/store';
 
 export default defineComponent({
   setup() {
-    const system = useStore();
+    const store = useStore();
     return {
-      system,
-      toggleTheme: system.toggleTheme
+      system: store,
+      toggleTheme: store.toggleTheme
     };
   },
   methods: {
@@ -40,7 +40,8 @@ export default defineComponent({
       if (res.status !== 200) {
         return;
       }
-      this.$router.push({path: '/'});
+      this.system.logout();
+      this.$router.push({name: 'Login'});
     },
   },
 });
