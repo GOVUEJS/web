@@ -30,19 +30,13 @@
         </v-icon>
       </template>
     </v-text-field>
+
     <v-btn
         color="success"
         @click="clickLogin"
         block
     >
       LOG IN
-    </v-btn>
-    <br>
-    <v-btn
-        @click="clickSignUp"
-        block
-    >
-      회원가입
     </v-btn>
   </v-form>
 </template>
@@ -107,9 +101,6 @@ export default defineComponent({
     validate() {
       (this.$refs.form as typeof VForm).validate();
     },
-    clickSignUp() {
-      this.$router.push({ name: "SignUp" })
-    }
   },
 });
 </script>
