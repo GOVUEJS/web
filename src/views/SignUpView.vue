@@ -1,105 +1,90 @@
 <template>
   <v-form
       ref="form"
-      v-model="formValid"
+      v-model="valid"
       lazy-validation
   >
     <v-text-field
+        v-model="user.email"
+        :rules="rules.email"
         label="E-mail"
-        v-model="email.value"
-        :rules="email.rules"
-        @keyup.enter="clickLogin"
-        counter
         required
-
     ></v-text-field>
 
     <v-text-field
-        label="Password"
-        v-model="password.value"
-        :rules="password.rules"
-        :type="password.show ? 'text' : 'password'"
-        @keyup.enter="clickLogin"
+        v-model="user.password"
+        :append-icon="show.password ? 'mdi-eye' : 'mdi-eye-off'"
+        :rules="[rules.password.required, rules.password.min]"
+        :type="show.password ? 'text' : 'password'"
+        label="비밀번호"
+        hint="At least 8 characters"
         counter
-        required
-    >
-      <template v-slot:append>
-        <v-icon @click="password.show = !password.show">
-          <template v-if="password.show">mdi-eye</template>
-          <template v-else>mdi-eye-off</template>
-        </v-icon>
-      </template>
-    </v-text-field>
+        @click:append="show.password = !show.password"
+    ></v-text-field>
+
+    <v-text-field
+        v-model="user.passwordCheck"
+        :append-icon="show.passwordCheck ? 'mdi-eye' : 'mdi-eye-off'"
+        :rules="rules.password"
+        :type="show.passwordCheck ? 'text' : 'password'"
+        label="비밀번호 확인"
+        hint="At least 8 characters"
+        counter
+        @click:append="show.passwordCheck = !show.passwordCheck"
+    ></v-text-field>
 
     <v-btn
+        :disabled="!valid"
         color="success"
-        @click="clickLogin"
-        block
+        class="mr-4"
+        @click="clickSubmit"
     >
-      LOG IN
+      회원가입
+    </v-btn>
+
+    <v-btn
+        class="mr-4"
+        @click="clickReset"
+    >
+      초기화
     </v-btn>
   </v-form>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import system from '@/api/system';
-import { useStore } from '@/store';
-import { VForm } from 'vuetify/components';
+import { defineComponent } from "vue";
+import { VForm } from "vuetify/lib/components";
 
 export default defineComponent({
-  setup() {
-    const store = useStore();
-    return {
-      store
-    };
-  },
   data: () => ({
-    formValid: true,
-    email: {
-      value: '',
-      rules: [
-        (v: string) => !!v || '이메일을 입력해주세요.',
-        (v: string) => /.+@.+\..+/.test(v) || '이메일이 유효하지 않습니다.',
-      ]
+    valid: true,
+    user: {
+      email: '',
+      password: '',
+      passwordCheck: '',
     },
-    password: {
-      value: '',
-      show: false,
-      rules: [
-        (v: string) => !!v || '패스워드를 입력해주세요.',
-      ]
+    rules: {
+      email: [
+        (value: string) => !!value || 'E-mail is required',
+        (value: string) => /.+@.+\..+/.test(value) || 'E-mail must be valid',
+      ],
+      password: [
+        (value: string) => !!value || 'Required.',
+        (value: string) => value.length >= 8 || 'Min 8 characters',
+        () => (`The email and password you entered don't match`),
+      ],
+    },
+    show: {
+      password: false,
+      passwordCheck: false,
     },
   }),
-  created() {
-    this.store.logout();
-  },
   methods: {
-    async clickLogin() {
-      this.validate();
-
-      if (!this.formValid) {
-        return;
-      }
-
-      const data = {
-        email: this.email.value,
-        pw: this.password.value
-      };
-      const res = await system.login(data);
-      if (res.status !== 200) {
-        return;
-      }
-      const accessToken = res.data.accessToken;
-      const refreshToken = res.data.refreshToken;
-
-      this.store.setAccessToken(accessToken);
-      this.store.setRefreshToken(refreshToken);
-
-      this.$router.push({ path: '/' });
-    },
-    validate() {
+    clickSubmit() {
       (this.$refs.form as typeof VForm).validate();
+    },
+    clickReset() {
+      (this.$refs.form as typeof VForm).reset();
     },
   },
 });
