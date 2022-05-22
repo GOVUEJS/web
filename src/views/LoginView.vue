@@ -45,6 +45,7 @@
 import { defineComponent } from 'vue';
 import system from '@/api/system';
 import { useStore } from '@/store';
+import { VForm } from 'vuetify/components';
 
 export default defineComponent({
   setup() {
@@ -70,7 +71,9 @@ export default defineComponent({
       ]
     },
   }),
-
+  created() {
+    this.store.logout();
+  },
   methods: {
     async clickLogin() {
       this.validate();
@@ -93,11 +96,10 @@ export default defineComponent({
       this.store.setAccessToken(accessToken);
       this.store.setRefreshToken(refreshToken);
 
-      this.$router.push({path: document.referrer});
+      this.$router.push({path: '/'});
     },
     validate() {
-      // eslint-disable-next-line
-      (this.$refs.form as any).validate();
+      (this.$refs.form as typeof VForm).validate();
     },
   },
 });

@@ -3,15 +3,15 @@
     <v-btn variant="plain" @click="clickMain">Hwisaek's web</v-btn>
     <v-spacer></v-spacer>
     <v-icon @click="toggleTheme">
-      <template v-if="system.theme==='light'">
+      <template v-if="store.theme==='light'">
         mdi-brightness-5
       </template>
       <template v-else>
         mdi-brightness-2
       </template>
     </v-icon>
-    <v-icon @click="clickLogin">mdi-login</v-icon>
-    <v-icon @click="clickLogout">mdi-logout</v-icon>
+    <v-icon v-if="!store.isLogin" @click="clickLogin">mdi-login</v-icon>
+    <v-icon v-else @click="clickLogout">mdi-logout</v-icon>
   </v-system-bar>
 </template>
 
@@ -24,7 +24,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
     return {
-      system: store,
+      store,
       toggleTheme: store.toggleTheme
     };
   },
@@ -40,7 +40,7 @@ export default defineComponent({
       if (res.status !== 200) {
         return;
       }
-      this.system.logout();
+      this.store.logout();
       this.$router.push({name: 'Login'});
     },
   },

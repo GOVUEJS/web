@@ -8,7 +8,11 @@ export const useStore = defineStore('store', {
     accessToken: '',
     refreshToken: '',
   }),
-  getters: {},
+  getters: {
+    isLogin(): boolean {
+      return !!this.accessToken && !!this.refreshToken;
+    }
+  },
   actions: {
     changePageTitle(title: string) {
       this.pageTitle = title;
