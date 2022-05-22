@@ -6,5 +6,8 @@ export default {
   },
   logout() {
     return echo_api.get('/logout');
+  },
+  signup(data: { email: string, pw: string, pwChk: string }) {
+    return echo_api.post('/signup', data);
   }
 };

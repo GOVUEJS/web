@@ -44,7 +44,7 @@ import articles from '@/api/articles';
 
 export default defineComponent({
   data: () => ({
-    valid: false,
+    formValid: false,
     articleItem: new ArticleItem(),
     titleRules: [
       (v: string) => !!v || '제목을 입력해주세요',
@@ -57,7 +57,7 @@ export default defineComponent({
     async clickWrite() {
       // eslint-disable-next-line
       (this.$refs['form'] as any).validate();
-      if (!this.valid) {
+      if (!this.formValid) {
         return;
       }
 

@@ -16,16 +16,16 @@
 
     <v-text-field
         label="Password"
-        v-model="password.value"
-        :rules="password.rules"
-        :type="password.show ? 'text' : 'password'"
+        v-model="pw.value"
+        :rules="pw.rules"
+        :type="pw.show ? 'text' : 'password'"
         @keyup.enter="clickLogin"
         counter
         required
     >
       <template v-slot:append>
-        <v-icon @click="password.show = !password.show">
-          <template v-if="password.show">mdi-eye</template>
+        <v-icon @click="pw.show = !pw.show">
+          <template v-if="pw.show">mdi-eye</template>
           <template v-else>mdi-eye-off</template>
         </v-icon>
       </template>
@@ -69,7 +69,7 @@ export default defineComponent({
         (v: string) => /.+@.+\..+/.test(v) || '이메일이 유효하지 않습니다.',
       ]
     },
-    password: {
+    pw: {
       value: '',
       show: false,
       rules: [
@@ -90,7 +90,7 @@ export default defineComponent({
 
       const data = {
         email: this.email.value,
-        pw: this.password.value
+        pw: this.pw.value
       };
       const res = await system.login(data);
       if (res.status !== 200) {
