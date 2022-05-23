@@ -10,6 +10,7 @@ function setInterceptor(instance: AxiosInstance) {
       config.headers = {};
     }
     const store = useStore();
+    config.headers['X-Forwarded-For'] = store.ip;
     if (store.accessToken !== '') {
       config.headers.Authorization = `Bearer ${store.accessToken}`;
     }

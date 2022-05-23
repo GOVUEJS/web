@@ -7,6 +7,7 @@ export const useStore = defineStore('store', {
     drawer: true,
     accessToken: '',
     refreshToken: '',
+    ip: '',
   }),
   getters: {
     isLogin(): boolean {
@@ -36,6 +37,9 @@ export const useStore = defineStore('store', {
     logout() {
       this.accessToken = '';
       this.refreshToken = '';
+    },
+    setIp(ip: string) {
+      this.ip = ip;
     }
   },
 });

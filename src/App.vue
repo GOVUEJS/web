@@ -10,7 +10,6 @@
 
     <v-main>
       <v-container fluid>
-
         <router-view></router-view>
       </v-container>
     </v-main>
@@ -26,6 +25,7 @@ import NavigationDrawer from '@/layouts/NavigationDrawer.vue';
 import AppBar from '@/layouts/AppBar.vue';
 import SystemFooter from '@/layouts/SystemFooter.vue';
 import { useStore } from '@/store';
+import axios from 'axios';
 
 export default defineComponent({
   components: {SystemFooter, AppBar, NavigationDrawer, SystemBar},
@@ -34,6 +34,17 @@ export default defineComponent({
     return {
       systemStore,
     };
+  },
+  created() {
+    this.getIp();
+  },
+  methods: {
+    async getIp() {
+      const res = await axios.get('https://api.ipify.org?format=json');
+      if (res.status === 200) {
+        this.systemStore.setIp(res.data.ip);
+      }
+    }
   },
 });
 </script>
