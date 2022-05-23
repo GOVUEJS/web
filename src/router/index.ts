@@ -5,27 +5,27 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Main',
-    component: () => import('@/views/HomeView.vue')
+    component: () => import('@/views/HomeView.vue'),
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/LoginView.vue')
+    component: () => import('@/views/LoginView.vue'),
   },
   {
     path: '/signup',
     name: 'SignUp',
-    component: () => import('@/views/SignUpView.vue')
+    component: () => import('@/views/SignUpView.vue'),
   },
   {
     path: '/home',
     name: 'Home',
-    component: () => import('@/views/HomeView.vue')
+    component: () => import('@/views/HomeView.vue'),
   },
   {
     path: '/about',
     name: 'About',
-    component: () => import('@/views/AboutView.vue')
+    component: () => import('@/views/AboutView.vue'),
   },
   {
     path: '/articles',
@@ -35,36 +35,45 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/articles/write',
     name: 'WriteArticle',
-    component: () => import('@/views/article/WriteArticleView.vue')
+    component: () => import('@/views/article/WriteArticleView.vue'),
+    meta: {requiresAuth: true},
   },
   {
     path: '/articles/:id',
     name: 'ReadArticle',
     component: () => import('@/views/article/ReadArticleView.vue'),
-    props: true
+    props: true,
   },
   {
     path: '/spam',
     name: 'Spam',
-    component: () => import('@/views/article/ArticleView.vue')
+    component: () => import('@/views/article/ArticleView.vue'),
   },
 
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    component: () => import('@/views/NotFoundView.vue')
+    component: () => import('@/views/NotFoundView.vue'),
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
 });
 
 router.beforeEach((to) => {
-  useStore().changePageTitle(String(to.name));
+  const store = useStore();
+  store.changePageTitle(String(to.name));
+
+  if (to.meta.requiresAuth && !store.isLogin) {
+    return {
+      path: '/login',
+    };
+  }
+
   if (to.path === '/') {
-    useStore().changePageTitle('Articles');
+    store.changePageTitle('Articles');
     return {name: 'Articles'};
   }
 });
