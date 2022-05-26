@@ -13,7 +13,7 @@
             subtitle=""
         ></v-list-item>
         <v-list-item v-else>
-          <v-btn block @click="$router.push({name:'Login'})">
+          <v-btn block @click="clickLogin">
             로그인
           </v-btn>
         </v-list-item>
@@ -59,6 +59,11 @@ export default defineComponent({
         ['mdi-delete', 'Spam', '/spam'],
       ],
     };
+  },
+  methods: {
+    clickLogin() {
+      this.$router.push({name: 'Login'});
+    },
   },
 });
 </script>
