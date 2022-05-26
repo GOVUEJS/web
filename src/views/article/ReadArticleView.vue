@@ -12,9 +12,7 @@
     <v-divider></v-divider>
 
     <v-card-text>
-      <pre style="white-space: pre-wrap">
-        {{ articleItem.content }}
-      </pre>
+      <pre style="white-space: pre-wrap">{{ articleItem.content }}</pre>
     </v-card-text>
 
     <v-divider></v-divider>
