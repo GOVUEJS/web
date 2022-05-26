@@ -5,6 +5,7 @@
       {{ articleItem.title }}
     </v-card-title>
     <v-card-subtitle>
+      작성자: {{ articleItem.writer }}<br/>
       작성일: {{ articleItem.date }}
     </v-card-subtitle>
 
@@ -35,7 +36,7 @@ export default defineComponent({
   props: {
     id: {
       type: String,
-      default: ''
+      default: '',
     },
   },
   data: () => ({
@@ -51,7 +52,7 @@ export default defineComponent({
     },
     clickBack() {
       this.$router.go(-1);
-    }
+    },
   },
 });
 </script>
