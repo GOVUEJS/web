@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { useStore } from '@/store';
+import { useUserStore } from '@/store/user';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -62,11 +63,13 @@ const router = createRouter({
   routes,
 });
 
+
 router.beforeEach((to) => {
   const store = useStore();
+  const userStore = useUserStore();
   store.changePageTitle(String(to.name));
 
-  if (to.meta.requiresAuth && !store.isLogin) {
+  if (to.meta.requiresAuth && !userStore.isLogin) {
     return {
       path: '/login',
     };

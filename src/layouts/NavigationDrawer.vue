@@ -4,13 +4,21 @@
       rail
       permanent
   >
-    <v-list>
-      <v-list-item
-          prepend-avatar=""
-          title="Hwisaek"
-          subtitle="hwisaek@github.com"
-      ></v-list-item>
-    </v-list>
+    <template v-slot:prepend>
+      <v-list>
+        <v-list-item
+            v-if="userStore.isLogin"
+            prepend-avatar=""
+            :title="userStore.email"
+            subtitle=""
+        ></v-list-item>
+        <v-list-item v-else>
+          <v-btn block @click="$router.push({name:'Login'})">
+            로그인
+          </v-btn>
+        </v-list-item>
+      </v-list>
+    </template>
 
     <v-divider></v-divider>
 
@@ -31,12 +39,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore } from '@/store';
+import { useUserStore } from '@/store/user';
 
 export default defineComponent({
   setup() {
     const store = useStore();
+    const userStore = useUserStore();
     return {
-      store
+      store,
+      userStore,
     };
   },
   data() {

@@ -5,14 +5,9 @@ export const useStore = defineStore('store', {
     theme: 'light',
     pageTitle: 'Articles',
     drawer: true,
-    accessToken: '',
-    refreshToken: '',
     ip: '',
   }),
   getters: {
-    isLogin(): boolean {
-      return !!this.accessToken && !!this.refreshToken;
-    }
   },
   actions: {
     changePageTitle(title: string) {
@@ -28,18 +23,8 @@ export const useStore = defineStore('store', {
     toggleDrawer() {
       this.drawer = !this.drawer;
     },
-    setAccessToken(token: string) {
-      this.accessToken = token;
-    },
-    setRefreshToken(token: string) {
-      this.refreshToken = token;
-    },
-    logout() {
-      this.accessToken = '';
-      this.refreshToken = '';
-    },
     setIp(ip: string) {
       this.ip = ip;
-    }
+    },
   },
 });

@@ -52,12 +52,15 @@ import { defineComponent } from 'vue';
 import system from '@/api/system';
 import { useStore } from '@/store';
 import { VForm } from 'vuetify/components';
+import { useUserStore } from '@/store/user';
 
 export default defineComponent({
   setup() {
     const store = useStore();
+    const userStore = useUserStore();
     return {
-      store
+      store,
+      userStore,
     };
   },
   data: () => ({
@@ -67,18 +70,18 @@ export default defineComponent({
       rules: [
         (v: string) => !!v || '이메일을 입력해주세요.',
         (v: string) => /.+@.+\..+/.test(v) || '이메일이 유효하지 않습니다.',
-      ]
+      ],
     },
     pw: {
       value: '',
       show: false,
       rules: [
         (v: string) => !!v || '패스워드를 입력해주세요.',
-      ]
+      ],
     },
   }),
   created() {
-    this.store.logout();
+    this.userStore.logout();
   },
   methods: {
     async clickLogin() {
@@ -90,7 +93,7 @@ export default defineComponent({
 
       const data = {
         email: this.email.value,
-        pw: this.pw.value
+        pw: this.pw.value,
       };
       const res = await system.login(data);
       if (res.status !== 200) {
@@ -99,17 +102,18 @@ export default defineComponent({
       const accessToken = res.data.accessToken;
       const refreshToken = res.data.refreshToken;
 
-      this.store.setAccessToken(accessToken);
-      this.store.setRefreshToken(refreshToken);
+      this.userStore.setAccessToken(accessToken);
+      this.userStore.setRefreshToken(refreshToken);
+      this.userStore.setEmail(this.email.value);
 
-      this.$router.push({ path: '/' });
+      this.$router.push({path: '/'});
     },
     validate() {
       (this.$refs.form as typeof VForm).validate();
     },
     clickSignUp() {
-      this.$router.push({ name: "SignUp" })
-    }
+      this.$router.push({name: 'SignUp'});
+    },
   },
 });
 </script>

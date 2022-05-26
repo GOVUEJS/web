@@ -19,13 +19,16 @@
 import systemAPI from '@/api/system';
 import { defineComponent } from 'vue';
 import { useStore } from '@/store';
+import { useUserStore } from '@/store/user';
 
 export default defineComponent({
   setup() {
     const store = useStore();
+    const userStore = useUserStore();
     return {
       store,
-      toggleTheme: store.toggleTheme
+      userStore,
+      toggleTheme: store.toggleTheme,
     };
   },
   methods: {
@@ -40,7 +43,7 @@ export default defineComponent({
       if (res.status !== 200) {
         return;
       }
-      this.store.logout();
+      this.userStore.logout();
       this.$router.push({name: 'Login'});
     },
   },

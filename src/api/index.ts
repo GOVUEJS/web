@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useStore } from '@/store';
 import router from '@/router';
+import { useUserStore } from '@/store/user';
 
 function setInterceptor(instance: AxiosInstance) {
   // 요청 인터셉터 추가하기
@@ -9,10 +10,9 @@ function setInterceptor(instance: AxiosInstance) {
     if (config.headers === undefined) {
       config.headers = {};
     }
-    const store = useStore();
-    config.headers['X-Forwarded-For'] = store.ip;
-    if (store.accessToken !== '') {
-      config.headers.Authorization = `Bearer ${store.accessToken}`;
+    config.headers['X-Forwarded-For'] = useStore().ip;
+    if (useUserStore().accessToken !== '') {
+      config.headers.Authorization = `Bearer ${useUserStore().accessToken}`;
     }
     return config;
   }, function (error) {
@@ -41,7 +41,7 @@ function setInterceptor(instance: AxiosInstance) {
 export const echo_api = function () {
   const axiosInstance = axios.create({
     baseURL: `${process.env.VUE_APP_API_SERVER}/api/v1`,
-    withCredentials: true
+    withCredentials: true,
   });
   return setInterceptor(axiosInstance);
 }();

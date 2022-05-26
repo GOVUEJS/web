@@ -14,6 +14,7 @@
       <td>{{ item.id }}</td>
       <td>{{ item.title }}</td>
       <td>{{ item.date }}</td>
+      <td>{{ item.writer }}</td>
     </tr>
     </tbody>
   </v-table>
@@ -37,6 +38,7 @@ export default defineComponent({
       {text: 'ID', value: 'id'},
       {text: 'Title', value: 'title'},
       {text: 'Date', value: 'date'},
+      {text: 'Writer', value: 'writer'},
     ],
     articleList: [],
     pagination: {

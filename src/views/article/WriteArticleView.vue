@@ -1,7 +1,7 @@
 <template>
   <v-form
       ref="form"
-      v-model="valid"
+      v-model="formValid"
   >
     <v-text-field
         v-model="articleItem.title"
@@ -41,6 +41,8 @@
 import { defineComponent } from 'vue';
 import { ArticleItem } from '@/model/model';
 import articles from '@/api/articles';
+import { VForm } from 'vuetify/components';
+
 
 export default defineComponent({
   data: () => ({
@@ -55,8 +57,7 @@ export default defineComponent({
   }),
   methods: {
     async clickWrite() {
-      // eslint-disable-next-line
-      (this.$refs['form'] as any).validate();
+      (this.$refs['form'] as typeof VForm).validate();
       if (!this.formValid) {
         return;
       }
