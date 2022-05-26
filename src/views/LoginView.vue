@@ -106,6 +106,7 @@ export default defineComponent({
       this.userStore.setRefreshToken(refreshToken);
       this.userStore.setEmail(this.email.value);
 
+      this.$toast.success('로그인 성공.');
       this.$router.push({path: '/'});
     },
     validate() {

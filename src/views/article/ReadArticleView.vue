@@ -21,11 +21,15 @@
       <v-btn variant="outlined" @click="clickBack">
         뒤로가기
       </v-btn>
-      <v-btn v-if="userStore.isLogin && userStore.email === articleItem.writer" color="primary" variant="outlined"
+      <v-btn v-if="userStore.isLogin && userStore.email === articleItem.writer"
+             color="primary"
+             variant="outlined"
              @click="clickEdit">
         수정
       </v-btn>
-      <v-btn v-if="userStore.isLogin && userStore.email === articleItem.writer" color="secondary" variant="outlined"
+      <v-btn v-if="userStore.isLogin && userStore.email === articleItem.writer"
+             color="secondary"
+             variant="outlined"
              @click="clickDelete">
         삭제
       </v-btn>

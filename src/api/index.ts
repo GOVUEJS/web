@@ -1,6 +1,9 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useStore } from '@/store';
 import { useUserStore } from '@/store/user';
+import { useToast } from 'vue-toastification';
+
+const toast = useToast();
 
 function setInterceptor(instance: AxiosInstance) {
   // 요청 인터셉터 추가하기
@@ -27,6 +30,10 @@ function setInterceptor(instance: AxiosInstance) {
   }, function (error) {
     // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
     // 응답 오류가 있는 작업 수행
+    if (error.response.status === 401) toast.error('권한이 없습니다.');
+    else if (error.response.status === 403) toast.error('권한이 없습니다.');
+    else toast.error('오류가 발생했습니다.');
+
     return Promise.reject(error);
   });
 

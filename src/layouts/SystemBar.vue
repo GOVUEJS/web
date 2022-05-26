@@ -10,7 +10,7 @@
         mdi-brightness-2
       </template>
     </v-icon>
-    <v-icon v-if="!store.isLogin" @click="clickLogin">mdi-login</v-icon>
+    <v-icon v-if="!userStore.isLogin" @click="clickLogin">mdi-login</v-icon>
     <v-icon v-else @click="clickLogout">mdi-logout</v-icon>
   </v-system-bar>
 </template>
@@ -44,6 +44,7 @@ export default defineComponent({
         return;
       }
       this.userStore.logout();
+      this.$toast.success('로그아웃했습니다.');
       this.$router.push({name: 'Login'});
     },
   },
