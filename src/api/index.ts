@@ -1,6 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useStore } from '@/store';
-import router from '@/router';
 import { useUserStore } from '@/store/user';
 
 function setInterceptor(instance: AxiosInstance) {
@@ -28,10 +27,6 @@ function setInterceptor(instance: AxiosInstance) {
   }, function (error) {
     // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
     // 응답 오류가 있는 작업 수행
-    if (error.response.status === 401) {
-      router.push({name: 'Login'});
-    }
-
     return Promise.reject(error);
   });
 

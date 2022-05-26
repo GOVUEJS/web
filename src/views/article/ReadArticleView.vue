@@ -23,6 +23,14 @@
       <v-btn variant="outlined" @click="clickBack">
         뒤로가기
       </v-btn>
+      <v-btn v-if="userStore.isLogin && userStore.email === articleItem.writer" color="primary" variant="outlined"
+             @click="clickEdit">
+        수정
+      </v-btn>
+      <v-btn v-if="userStore.isLogin && userStore.email === articleItem.writer" color="secondary" variant="outlined"
+             @click="clickDelete">
+        삭제
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -31,8 +39,14 @@
 import { defineComponent } from 'vue';
 import { ArticleItem } from '@/model/model';
 import articles from '@/api/articles';
+import { useUserStore } from '@/store/user';
 
 export default defineComponent({
+  setup() {
+    return {
+      userStore: useUserStore(),
+    };
+  },
   props: {
     id: {
       type: String,
@@ -52,6 +66,15 @@ export default defineComponent({
     },
     clickBack() {
       this.$router.go(-1);
+    },
+    clickEdit() {
+      this.$router.push({name: 'EditArticle', params: {id: this.id}});
+    },
+    async clickDelete() {
+      const res = await articles.a005(Number(this.id));
+      if (res.status === 204) {
+        this.$router.push({name: 'Articles'});
+      }
     },
   },
 });
