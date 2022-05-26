@@ -1,7 +1,7 @@
 <template>
   <!-- App.vue -->
 
-  <v-app :theme="systemStore.theme">
+  <v-app :theme="store.theme">
     <SystemBar/>
 
     <NavigationDrawer/>
@@ -30,9 +30,9 @@ import axios from 'axios';
 export default defineComponent({
   components: {SystemFooter, AppBar, NavigationDrawer, SystemBar},
   setup() {
-    const systemStore = useStore();
+    const store = useStore();
     return {
-      systemStore,
+      store,
     };
   },
   created() {
@@ -42,7 +42,7 @@ export default defineComponent({
     async getIp() {
       const res = await axios.get('https://api.ipify.org?format=json');
       if (res.status === 200) {
-        this.systemStore.setIp(res.data.ip);
+        this.store.setIp(res.data.ip);
       }
     }
   },
